@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8" />
+    <title>formulaire d'inscription </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <link href="css/grayscale.css" rel="stylesheet">
+   
+
+    <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+<!-- debut de nav -->
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+
+          
+                   
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                   
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="index.html">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="consultation.html">Consulter</a>
+                    </li>
+                   
+                    <li>
+                        <a class="page-scroll" href="authentification.html">Login</a>
+                    </li>
+                     
+                </ul>
+            </div>
+           
+        </div>
+        
+    </nav>
+
+
+<!--   fin de nav -->
+
+<div class="container">
+
+<div class="page-header">
+   <h3> veuillez remplir cette formulaire à fin de vous inscrire<h3> 
+</div>
+
+<!-- Registration form - START -->
+
+<div class="corps">
+    <div class="row">
+
+        <form role="form" method="post" action="php/insertion_user.php">
+            <div class="col-lg-6">
+                <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span>champ obligatoire </strong></div>
+                <div class="form-group">
+                    <label>Entrer votre Nom: </label>
+                    <div class="input-group">
+                        <input type="text" class="form-control input-lg"  name="nom" placeholder="Nom " required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Entrer notre prenom</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control input-lg" name="prenom" placeholder="Prenom" required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label> quel genre de type d'utilisateur souhaitez vous etre ??? </label>
+                    <div class="input-group">
+                        <select class="form-control input-lg"  name="theme_drill" >
+
+                            <option value="super_utilisateur">SUPER UTILISATEUR  </option>
+                            <option value="normal_user"> UTILISATEUR NORMAL </option>
+
+
+                        </select>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>entrer votre Email</label>
+                    <div class="input-group">
+                        <input type="email" class="form-control input-lg" name="email_text" placeholder="Email" required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                
+                
+                
+            </div>
+        
+
+            <div class="col-lg-5 col-md-push-1">
+                <div class="col-md-12">
+
+                   <div class="form-group">
+                        <label >Pseudo  </label>
+                        <div class="input-group">
+                            <input type="text" class="form-control input-lg" name="pseudo" placeholder="Pseudo" required>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label >Mot de passe </label>
+                        <div class="input-group">
+                            <input type="password" class="form-control input-lg" name="pwd" placeholder="mot de passe " required>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Confirmation de mot de passe  </label>
+                        <div class="input-group">
+                            <input type="password" class="form-control input-lg" name="confirmation_pwd" placeholder="Confirmation de mot de passe" required>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                    </div>
+
+                     <input type="submit" class="btn btn-primary btn-lg btn-block" value="valider"/> 
+
+
+                    
+                </div>
+            </div>
+        </form>
+</div>
+
+
+</div>
+
+</body>
+</html>
