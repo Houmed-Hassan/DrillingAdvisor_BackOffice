@@ -141,7 +141,7 @@
 
 /****************************************************************************************************************************************************/
 
-		function inscription_user($pseudo, $nom, $prenom, $email, $password, $type, $date_creation){
+		function inscription_user($nom, $prenom, $email, $password, $password_confirmation, $created_date){
 
 
 
@@ -149,27 +149,46 @@
 				require_once 'base_connexion.php'; // centraliser les erreurs
 			 	
 			 	try{     // créer un objet PDO pour communiquer avec SGBD    
-			 	
-			 	$cnx = new PDO(DSN, LOGIN, PASSWORD, $options);    
+					 	
+					 	$cnx = new PDO(DSN, LOGIN, PASSWORD, $options);    
 
 
-			 	$pwd_user = md5($password);
-			 	
-
-			    $req = "INSERT INTO utilisateur VALUES ('', '".$pseudo."', '".$nom."', '".$prenom."', '".$email."', '".$pwd_user."', '".$type."', '".$date_creation."' )";     // envoyer la requête au SGBD    
-			    
-			    $cnx->exec($req);  
+					 	$pwd_user = md5($password);
+					 	$pwd_user_confirmation = md5($password_confirmation);
 
 
-			    echo '<script type="text/javascript">
+					 	if($pwd_user != $pwd_user_confirmation){
 
-			    		alert("insertion reussi");
 
-			    	   </script>';
 
-			    	 header('Location: ../inscription.html');
-			   			    
+					 		echo '<script type="text/javascript">
 
+					    		alert("desole l\'insertion n\' est pas reussi car le mot de passe n\' est pas confirmer ");
+
+					    	   </script>';
+
+			    		   	header( "../inscription.html");
+
+
+					 	}
+					 	
+
+				 	else{
+
+					    $req = "INSERT INTO utilisateur VALUES ('', '".$nom."', '".$prenom."', '".$email."', '".$pwd_user."', '".$created_date."')";     // envoyer la requête au SGBD    
+					    
+					    $cnx->exec($req);  
+
+
+					    echo '<script type="text/javascript">
+
+					    		alert("insertion reussi");
+
+					    	   </script>';
+
+				    	 header('Location: ../authentification.html');
+				   			    
+				    }
 			    }	catch (PDOException $e){     // en cas d’erreur de connexion ou d’insertion   
 
 			      
