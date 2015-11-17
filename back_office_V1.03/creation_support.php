@@ -13,79 +13,21 @@ session_start();
     <title>Création d'un support  </title>
 
  
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/styles.css" />
-     <link href="css/grayscale.css" rel="stylesheet">
-    <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
 
 </head>
 
 <body>
 
-        <div class="container">
-        	<div class="row">
-        	    <div class="col-lg-3 col-lg-offset-2">
+                    
 
-        			<nav class="navbar navbar-custom navbar-fixed-top" role="navigation"  background-color="black">
-        			        <div class="container">
-
-        			          
-        			                   
-        			            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-        			                <ul class="nav navbar-nav">
-        			                   
-        			                   <li> 
-        			                   		<div class="form-group">
-        			                   
-        			                    	<a href="profil_utilisateur.php"> <img src="image/profil_image.gif"  alt="image profil" style ="width:50px;height:50px;" /></a>
-
-        			                        </div>
-        			                    </li>
-
-        			                    <li>
-        			                    	
-        			                   			 <a href="php/deconnexion.php"> Deconnexion </a>
-
-        			                    </li>
-        			           
-        			        	</div>
-        			        </ul>
-        			        
-        			</nav>
-
-        		</div>
-
-
-        	</div>
-
-
-
-<div class="container">
-
-<div class="page-header">
-   <h3> Création d'un support <h3> 
-</div>
-
-
-<div class="corps">
-    <div class="row">
-
-        <form role="form" method="post" action="php/insertion_suppport.php">
-            <div class="col-lg-6">
-
-				<div class="form-group">
-				
-				
-				
-					
-					  <div class="form-group">
-                            <label>preciser le categorie auquel appartient votre thème </label>
-                            <div class="input-group" id="categorie_d">
-                                <select class="form-control input-lg"  id="categorie" name="categorie">
-
-                                    <?php
+      
+            <form action="php/ajout_support.php" method="POST" name="ajout_support">
+                
+                <input type="text"   name="categorie" value=<?php echo $_POST['categorie']?> >
+                <input type="text" name="titre_support" required  placeholder="veuillez donner un titre"> </br>
+                
+                <select name="sous_theme_support"> 
+                      <?php
 
                                      require_once 'php/base_connexion.php';
 
@@ -98,7 +40,7 @@ session_start();
 
 
                                             else{
-
+                                                
 
 
                                                 try{    
@@ -106,11 +48,13 @@ session_start();
 
                                                     $email =  $_SESSION['email_user'];
 
-                                                    $cnx = new PDO(DSN, LOGIN, PASSWORD, $options);      
+                                                    $cnx = new PDO(DSN, LOGIN, PASSWORD, $options);     // requête SQL d’interrogation de la table ville   
                                                 
-                                                    $req = "SELECT * FROM categorie ";     // envoyer la requête au SGBD    
+                                                    $req1 = "SELECT soustheme.nom FROM soustheme, categorie where soustheme.categorie_id = categorie.id
+
+                                                        and categorie.nom='".$_POST['categorie']."'";     // envoyer la requête au SGBD    
                                                 
-                                                    $res = $cnx->query($req);     // parcourir les lignes de résultat    
+                                                    $res = $cnx->query($req1);     // parcourir les lignes de résultat    
 
                                                     while ($ligne = $res->fetch()){      // afficher les données de la ligne  
                                                                               
@@ -128,81 +72,64 @@ session_start();
                                                     }
                                             }
 
-                                	
+                                    
                                     ?>
 
-                                </select>
+                </select> </br>
 
-								  <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                            </div>
 
-                        </div>
-					 
-					<div class="form-group">
-                            <label>preciser le categorie auquel appartient votre thème, s' il appartient à un thème  </label>
-                            <div class="input-group" id="categorie_d">
-                                <select class="form-control input-lg"  id="theme"  name="theme">
 
-                                    <option value="aucun">  aucun </option>
+                               <input type="text" name="nom_support" required placeholder="veuillez donner un nom"/> </br>
+                               <input type="file" name="image_support"  placeholder="veuillez donner un nom"/> </br>
+
+                               
+                                <select name="type_support">   
+                                    <?php
                                     
-                                        <?php
+
+                                        if($_POST['categorie'] == "Education"){
 
 
-                                                $req = "SELECT * FROM theme";     // envoyer la requête au SGBD    
-                                                
-                                                $res = $cnx->query($req);     // parcourir les lignes de résultat    
+                                            echo'
 
-                                                while ($ligne = $res->fetch()){      // afficher les données de la ligne  
-                                                                              
-                                                    echo "<option value=".$ligne['nom'].">". $ligne['nom'] ."</option>";
+                                                        <option value="cours"> Cours </option>
+
+                                                        <option value="livre">  Livre </option>
+
+                                                        <option value="Tutorial"> Tutorial </option> 
+
                                                     
-                                                }
+                                                ';
+
+                                        }
 
 
-                                        ?>
-                                   
+                                        else if($_POST['categorie'] == "Restauration"){
+
+                                            echo'
+
+                                                        <option value="entre"> entre </option>
+
+                                                        <option value="dessert">  dessert </option>
+
+                                                        
+
+                                                    
+                                                ';
+                                        }
+
+
+                                    ?>
                                 </select>
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                            </div>
-                    </div>
-					
-					 <div style="text-align: center" class="form-group">
-							
-					      <p>    Parcourir : Choisissez un fichier(Taille maximum: 2 048Kio)</p>
-					 	<div class="input-group" id="file_insert">
-							<input type="file" name="test" value="Parcourir" class="form-control input-lg"  placeholder="ajouter une fichier"/>
 
-								  <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-			
-						  </div>
-					 </div>
-					 <br/>
+                     <input type="file" name="lien"  placeholder=" un lien vers votre fichier" required/>
+
+                     <textarea cols="50"  rows="10"  name="description"  placeholder> </textarea>  
 
 
-					 <div class="form-group">
-					      <textarea  name="message" class="form-control input-lg"  value="Message"  placeholder="Déscription" required ></textarea>
-							
-					 </div>
-					
-					  
-					 
-					 
-					
-                </div>
-              
-                 
-                 <input type="submit" class="btn btn-primary btn-lg btn-block" value="Valider"  style="right"  style="width:130px" /> 
-				
+                     <input type="submit" value="valider" name="valider">
+            </form>
 
-                  
-                    </div>
-                </div>
-            </div>
-        </form>
-</div>
-<!-- Registration form - END -->
-
-</div>
 
 </body>
 </html>
