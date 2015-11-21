@@ -43,7 +43,7 @@ session_start();
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="index.html">About</a>
+                        <a class="page-scroll" href="index.php">About</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="espace_membres.php">espace utilisateur</a>
@@ -102,11 +102,11 @@ session_start();
                         while ($ligne = $res->fetch()){       // afficher les données de la ligne  
                     
                                  
-                                 $pseudo = $ligne['login'];
+                                
                                  $nom = $ligne['nom'];
                                  $prenom = $ligne['prenom'];
                                  $email_user = $ligne['email'];
-                                 $type_user = $ligne['type'];                                
+                                                                
                                  
 
                         }  
@@ -154,14 +154,7 @@ session_start();
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label >Type d'utilisateur :  </label>
-                        <div class="alert alert-success">
-                            
-                           <span class="glyphicon glyphicon-remove"></span><strong> <label id="profil_identite"> <?php  echo $type_user; ?></label> </br> </strong>
-                        </div>
-                    </div>
-
+                  
                    
 
                 </div>
@@ -169,14 +162,7 @@ session_start();
             <div class="col-lg-5 col-md-push-1">
                 <div class="col-md-12">
 
-                 <div class="form-group">
-                        <label  id="label_profil" > PSEUDO :   </label>
-                        <div class="alert alert-success">
-                            
-                           <span class="glyphicon glyphicon-remove"></span><strong> <label id="profil_identite"> <?php  echo $pseudo;  ?></label> </br> </strong>
-                        </div>
-                    </div>
-
+                
 
                    <div class="form-group">
                         <label  id="label_profil" > NOM:    </label>

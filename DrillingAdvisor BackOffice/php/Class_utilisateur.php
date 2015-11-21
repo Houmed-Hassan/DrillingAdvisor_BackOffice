@@ -160,11 +160,11 @@
 			    $cnx->exec($req);  
 
 
-			    echo <script type="text/javascript">
+			    echo '<script type="text/javascript">
 
 			    		alert("insertion reussi");
 
-			    	   </script>;
+			    	   </script>';
 
 			    	 header('Location: ../profil.html');
 			   			    

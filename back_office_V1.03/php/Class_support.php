@@ -71,41 +71,39 @@
 
 
 
-public function  modifier_support($titre, $nom, $theme, $sous_theme, $type, $lien, $description, $image, $categorie, $id_utilisateur){
+public function  modifier_support($titre, $nom, $type, $lien, $description, $image, $id_suport){
 
 
 			require_once 'base_connexion.php';
 
-           
 
-            	try{
-
-
-            		$optionss = array(
-
-		PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-
-		 );
-            			$cnx = new PDO(DSN, LOGIN, PASSWORD, $optionss);    
+			try{
+           // connexion à la base des données 
+				$cnx = new PDO (DSN, LOGIN, PASSWORD, $options);
 
 
-					    $req = "update INTO  support VALUES 
-					    ('', '".$nom."', '".$image."', '".$categorie."', '".$id_utilisateur."', '".$theme."', '".$sous_theme."', '".$type."', 
-					    	'".$lien."', '".$description."', '".$titre."')";        
-					    
-					    $cnx->exec($req);  
+				// requete de mise à jour
+
+				$requete_update ="UPDATE  support set nom='$nom', image= '$image', type='$type', lien='$lien', description='$description' WHERE id=$id_suport";
+
+				echo $requete_update;
+
+			    $cnx -> exec($requete_update);
 
 
 
-					  
-				    }
-			    	catch (PDOException $e){       
+				echo " je suis arrive ici \n";
 
-			      
-			      die("echec : ".$e->getMessage()); 
+				
+				header('Location: consulter_support.php');
+
+			}catch(PDOException $ex){
 
 
-			  	 	}
+					echo "desole il y a eu une erreur";
+
+			}
+
 
 		} // fin de la fonction update
 
@@ -170,7 +168,7 @@ public function consulter(){
 					   $res = $cnx->query($req);     // parcourir les lignes de résultat    
 
 
-echo' <table> ';
+echo' <table style="width:100%">';
 	echo '<tr>  <td>  Nom </td>  
 
 
@@ -180,7 +178,8 @@ echo' <table> ';
 				<td>  lien </td> 
 				<td>  type </td> 
 				<td>  description </td> 
-				<td>  categorie </td> 
+				<td>  Modifier</td>
+				<td> Supprimer </td> 
 
 	 </tr>' ;
 //echo " je suis arrive jusqu'a ici 11111111 </br>";
@@ -197,7 +196,10 @@ echo' <table> ';
 		 				   		echo '<td>'.$ligne1['type']. '</td>';
 		 				   		echo '<td>'.$ligne1['description']. '</td>';
 
-		 				   		echo '<td> <a href="suppression_support.php"> <input type="submit" VALUE="supression"/></a></td>';
+
+		 				   		echo '<td> <a href="../form_modification_support.php?id='.$ligne1['id'].'"> <input type="submit" VALUE="Modifier"/></a></td>';
+
+		 				   		echo '<td> <a href="suppression_support.php?id='.$ligne1['id'].'"> <input type="submit" VALUE="Supression"/></a></td>';
 		 				   		
 
 						echo '</tr>';	 				   
@@ -238,14 +240,14 @@ echo '</table>';
 
 
 
-
-			            				$id_utilisateur = $_SESSION['email_user'];
-
-								    $req = "drop * FROM support where $id='".$id_support."'";
+								    $req = "DELETE FROM support WHERE id='".$id_support."'";
  
 								    
-								   $res = $cnx->query($req);     // parcourir les lignes de résultat    
+								    $cnx -> exec($req);
+								    
 
+
+								   	header('Location: consulter_support.php');
 
 								  
 							    }
@@ -256,6 +258,10 @@ echo '</table>';
 
 
 						  	 	}
+
+
+
+
 
 		}
 

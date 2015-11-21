@@ -1,7 +1,7 @@
 <?php
 
 
-
+	
 	require 'Class_utilisateur.php';
 
 	
@@ -15,13 +15,19 @@
 	$created_date = date("Y-m-d H:i:s");
 
 
+if(isset($_SESSION['email_user'])){
 
+    header('Location:../espace_membres.php');
+
+}
+
+else{
 	
 	$user = new utilisateur();
 	
 	$user->inscription_user($nom, $prenom, $email, $password, $password_confirmation,  $created_date);
 
-	
+}
   	 	
 
 ?>

@@ -1,23 +1,35 @@
 <?php
-session_start();
+
+    session_start();
 ?>
 
 
 <!DOCTYPE html>
 <html>
-<head>
-	<title>  creation d'un theme </title>
-</head>
-<body>
+    <head>
+        <title> creation d'un sous theme </title>
+    </head>
+    <body>
+        
+        <?php
 
-		
- 			<form action="ajout_sous_theme.php" method="post" name="ajout-sous-theme">
- 				
-				
+            if(!isset($_SESSION['email_user'])){
 
-				 <select class="form-control input-lg"  id="theme"  name="theme">
+                header('Location:authentification.html');
 
-                      <?php
+            }
+
+
+            else{
+        ?>
+
+
+            <form  name="form_creation_sous_theme" method="POST"  action="php/insertion_theme.php">
+                            
+    
+                        <select name="categorie" id="categorie" onchange="showHint()">
+
+                                  <?php
 
                                      require_once 'php/base_connexion.php';
 
@@ -60,74 +72,59 @@ session_start();
                                                     }
                                             }
 
-                                	
+                                    
                                     ?>
-
                                 </select>
 
 
-                                 <select class="form-control input-lg"  id="theme"  name="theme">
-
-                      <?php
-
-                                     require_once 'php/base_connexion.php';
+                        </select></br>
 
 
-                                            if(!isset($_SESSION['email_user'])){
+                        <select name="theme" id="theme">
+                           
+                                        <script>
+                                            showHint();
+                                            function showHint() {
+                                                    var e = document.getElementById("categorie");
+                                                    var strUser = e.options[e.selectedIndex].value;
+                                                if (strUser ==null) { 
+                                                    return;
+                                                } else {
+                                                    var xmlhttp = new XMLHttpRequest();
+                                                    xmlhttp.onreadystatechange = function() {
+                                                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                                                            document.getElementById("theme").innerHTML = xmlhttp.responseText;
+                                                            
+                                                        }
+                                                    };
 
-                                                    header('Location:authentification.html');
-
+                                                    xmlhttp.open("GET", "php/recherche_theme.php?nom=" + strUser, true);
+                                                    xmlhttp.send();
+                                                }
                                             }
+                                        </script>
+                                   
 
-
-                                            else{
-                                                
-
-
-                                                try{    
-
-
-                                                    $email =  $_SESSION['email_user'];
-
-                                                    $cnx = new PDO(DSN, LOGIN, PASSWORD, $options);     // requête SQL d’interrogation de la table ville   
-                                                
-                                                    $req1 = "SELECT * FROM theme ";     // envoyer la requête au SGBD    
-                                                
-                                                    $res = $cnx->query($req1);     // parcourir les lignes de résultat    
-
-                                                    while ($ligne = $res->fetch()){      // afficher les données de la ligne  
-                                                                              
-                                                     
-                                                            echo "<option value=".$ligne['nom'].">". $ligne['nom'] ."</option>";
-                                                    
-                                                    }
-
-
-                                                }   catch(PDOException $e){  
-
-
-                                                       die("echec : ".$e->getMessage()); 
-                                            
-                                                    }
-                                            }
-
-                                    
-                                    ?>
-
-                                </select> </br>
+                        </select> </br>
 
 
 
-                                <input type="text" name="nom_sous_theme" required placeholder="Nom "/> </br>
-
-                                <input  type="file" name="image_sous_theme" placeholder="inserer votre image" /> </br>
-                                
-                                <textarea cols="30"  placeholder="decrire votre theme"></textarea> </br>
+                        <input type="text"  name="nom_theme" placeholder="veuillez saisir votre NOM" required /> </br>
 
 
+                        <input type="file"  name="image_theme" placeholder="veuillez lui donner une image" /></br>
 
-                        <input type="submit" value="valider" name="valider">
- 			</form>
+                        <textarea name="description" ></textarea>
 
-</body>
+
+
+                        <input type="submit"  value="valider" name="valider"/>
+
+            </form>
+        <?php
+
+            }
+        ?>
+
+    </body>
 </html>

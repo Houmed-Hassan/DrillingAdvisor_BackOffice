@@ -58,39 +58,31 @@ while ($ligne = $res->fetch()){       // afficher les données de la ligne
 
 // recuperer les id de sous theme 
 
- try{    
-		   	$id_soustheme=null;
+     
+		   	$id_soustheme=$_POST['theme'];
 
 
-            $cnx = new PDO(DSN, LOGIN, PASSWORD, $options);     // requête SQL d’interrogation de la table ville   
-		                    
-            $requete2 = "SELECT id FROM soustheme WHERE  nom='".$_POST['sous_theme_support']."'";     // envoyer la requête au SGBD    
-	                    
-            $res = $cnx->query($requete2);     // parcourir les lignes de résultat    
-
-//echo " je suis arrive jusqu'a ici 11111111 </br>";
-
-            while ($ligne = $res->fetch()){       // afficher les données de la ligne  
-		                    
-		                                 
-            $id_soustheme = $ligne['id'];
-		                              /// echo " je suis arrive jusqu'a ici dans la boucle 1 </br>";
-            }
-      } catch(PDOException $e ){
-
-
-      			echo "desole il y a eu une erreur";
-      	
-      }
-
-
+       
 
       echo $id_soustheme;
 
                   $titre= $_POST['titre_support'];
                   $nom =$_POST['nom_support'];
 
-                  $image = $_POST['image_support'];
+                  
+
+                   $image =null;
+
+                  if(isset($_POST['image_support'])){
+
+                    $image= $_POST['image_support']; 
+                  
+                  }
+
+                  else{
+
+                    $image = "vide";
+                  }
 
             $lien = $_POST['lien'];
 
@@ -118,6 +110,9 @@ while ($ligne = $res->fetch()){       // afficher les données de la ligne
         alert("l\'insertion  est pas reussi car le mot de passe  est  confirmer ");
 
            </script>';
+
+
+      header('Location: ../espace_membres.php');
 
 }
 

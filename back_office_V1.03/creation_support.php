@@ -23,11 +23,9 @@ session_start();
       
             <form action="php/ajout_support.php" method="POST" name="ajout_support">
                 
-                <input type="text"   name="categorie" value=<?php echo $_POST['categorie']?> >
-                <input type="text" name="titre_support" required  placeholder="veuillez donner un titre"> </br>
-                
-                <select name="sous_theme_support"> 
-                      <?php
+                 <select name="categorie" id="categorie" onchange="showHint()">
+
+                                  <?php
 
                                      require_once 'php/base_connexion.php';
 
@@ -50,11 +48,9 @@ session_start();
 
                                                     $cnx = new PDO(DSN, LOGIN, PASSWORD, $options);     // requête SQL d’interrogation de la table ville   
                                                 
-                                                    $req1 = "SELECT soustheme.nom FROM soustheme, categorie where soustheme.categorie_id = categorie.id
-
-                                                        and categorie.nom='".$_POST['categorie']."'";     // envoyer la requête au SGBD    
+                                                    $req = "SELECT * FROM categorie ";     // envoyer la requête au SGBD    
                                                 
-                                                    $res = $cnx->query($req1);     // parcourir les lignes de résultat    
+                                                    $res = $cnx->query($req);     // parcourir les lignes de résultat    
 
                                                     while ($ligne = $res->fetch()){      // afficher les données de la ligne  
                                                                               
@@ -74,52 +70,73 @@ session_start();
 
                                     
                                     ?>
+                                </select>
 
-                </select> </br>
+                                
+                                <select name="theme" id="theme">
+                                   
+                                                <script>
+                                                    showHint();
+                                                    function showHint() {
+                                                            var e = document.getElementById("categorie");
+                                                            var strUser = e.options[e.selectedIndex].value;
+                                                        if (strUser ==null) { 
+                                                            return;
+                                                        } else {
+                                                            var xmlhttp = new XMLHttpRequest();
+                                                            xmlhttp.onreadystatechange = function() {
+                                                                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                                                                    document.getElementById("theme").innerHTML = xmlhttp.responseText;
+                                                                    
+                                                                }
+                                                            };
 
+                                                            xmlhttp.open("GET", "categorie_theme.php?nom=" + strUser, true);
+                                                            xmlhttp.send();
+                                                        }
+                                                    }
+                                                </script>
+                                           
+
+                                </select> </br>
+
+                                <input type="text" name="titre_support" required  placeholder="veuillez donner un titre"> </br>
+                
+               
+                                
 
 
                                <input type="text" name="nom_support" required placeholder="veuillez donner un nom"/> </br>
                                <input type="file" name="image_support"  placeholder="veuillez donner un nom"/> </br>
 
                                
-                                <select name="type_support">   
-                                    <?php
-                                    
+                                <select name="type_support" id="type_support">   
+                                   
+                                     <script>
+                                            showHint();
+                                            function showHint() {
+                                                    var e = document.getElementById("categorie");
+                                                    var strUser = e.options[e.selectedIndex].value;
+                                                if (strUser ==null) { 
+                                                    return;
+                                                } else {
+                                                    var xmlhttp = new XMLHttpRequest();
+                                                    xmlhttp.onreadystatechange = function() {
+                                                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                                                            document.getElementById("type_support").innerHTML = xmlhttp.responseText;
+                                                         
 
-                                        if($_POST['categorie'] == "Education"){
-
-
-                                            echo'
-
-                                                        <option value="cours"> Cours </option>
-
-                                                        <option value="livre">  Livre </option>
-
-                                                        <option value="Tutorial"> Tutorial </option> 
-
-                                                    
-                                                ';
-
-                                        }
-
-
-                                        else if($_POST['categorie'] == "Restauration"){
-
-                                            echo'
-
-                                                        <option value="entre"> entre </option>
-
-                                                        <option value="dessert">  dessert </option>
-
-                                                        
-
-                                                    
-                                                ';
-                                        }
+                                                        }
+                                                    };
+                                                     
+                                                    xmlhttp.open("GET", "categorie.php?nom=" + strUser, true);
+                                                    xmlhttp.send();
 
 
-                                    ?>
+                                                }
+                                            }
+                                        </script>
+                                   
                                 </select>
 
                      <input type="file" name="lien"  placeholder=" un lien vers votre fichier" required/>

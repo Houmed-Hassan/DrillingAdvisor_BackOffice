@@ -1,3 +1,11 @@
+<?php
+
+session_start();
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,14 +56,31 @@
                     <li>
                         <a class="page-scroll" href="#about">About</a>
                     </li>
-                   
+                  
+            <?php
+
+                   if(isset($_SESSION['email_user'])){
+
+                    echo '   
+                    <li>
+                        <a class="page-scroll" href="espace_membres.php">Espace utilisateur </a>
+                    </li>';
+
+                    }
+
+                    else{
+
+            ?>
                     <li>
                         <a class="page-scroll" href="inscription.html">Inscription </a>
                     </li>
                     <li>
                         <a class="page-scroll" href="authentification.html">Login</a>
                     </li>
-                     
+                    <?php
+
+                }
+                    ?>
                 </ul>
             </div>
            

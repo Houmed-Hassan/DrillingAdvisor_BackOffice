@@ -67,16 +67,13 @@ session_start();
 		    
 		    <div class="page-header">
 		       
-				  <a href="categorie.php"> <input type="submit" class="btn_profil" value="créer un sous-theme"/> </a> &nbsp; &nbsp;
-	       		  <a href="categorie.php"> <input type="submit" class="btn_profil" value="créer un support "/> </a> &nbsp; &nbsp;
+				  <a href="creer_un_sous_theme.php"> <input type="submit" class="btn_profil" value="créer un sous-theme"/> </a> &nbsp; &nbsp;
+	       		  <a href="creation_support.php"> <input type="submit" class="btn_profil" value="créer un support "/> </a> &nbsp; &nbsp;
 	       		  <a href="php/consulter_support.php"> <input type="submit" class="btn_profil" value="consulter vos supports "/> </a> &nbsp; &nbsp;
-	       		  <a href="consulter_theme.php"> <input type="submit" class="btn_profil" value="consulter vos theme "/> </a> &nbsp; &nbsp;
+	       		  <a href="php/affichage_theme.php"> <input type="submit" class="btn_profil" value="consulter vos theme "/> </a> &nbsp; &nbsp;
 				
-			</div>
-						
+			</div>				
 
-		       
-		  
 	</div>
 
 </div>
