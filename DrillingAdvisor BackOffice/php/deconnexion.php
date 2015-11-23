@@ -10,7 +10,7 @@ session_destroy();
 
 
 
-header('Location: ../authentification.html');//redirection vers la page d'accueil 
+header('Location: ../index.php');//redirection vers la page d'accueil 
 	
 
 ?>

@@ -31,7 +31,7 @@
                 <div class="clr"></div>
             </div><!--/ Codrops top bar -->
             <header>
-			<a href="./acceuil.html">
+			<a href="index.php">
                 <img src="images/img1.png"  style ="width:70px;height:70px;" />
 
 			   <img src="images/img2.png"  style ="width:180px;height:50px; " /></h1></br></br></br></br>
@@ -41,55 +41,50 @@
 				
             </header>
             <section>				
-                <div id="container_demo" >
+                <div id="container_demo" class="animate form" >
                     <!-- hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4  -->
                     <a class="hiddenanchor" id="toregister"></a>
                     <a class="hiddenanchor" id="tologin"></a>
                     <div id="wrapper">
                        
-                        <div id="register" class="animate form">
-                            <form  action="authentification.php" > 
+                        <div  class="animate form">
+                            <form  action="php/insertion_user.php" method="POST" > 
                                 <h1> Sign up </h1> 
 								<p> 
-                                    <label for="usernamesignup" class="uname" data-icon="u">First name</label>
-                                    <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="Aimad" />
+                                    <label for="usernamesignup" class="uname" data-icon="u">NOM </label>
+                                    <input id="usernamesignup" name="nom" required="required" type="text" placeholder="xxxx" />
                                 </p>
 								<p> 
-                                    <label for="usernamesignup" class="uname" data-icon="u">Last name</label>
-                                    <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="GOUSSA" />
+                                    <label for="usernamesignup" class="uname" data-icon="u">Prenom</label>
+                                    <input id="usernamesignup" name="prenom" required="required" type="text" placeholder="xxx" />
                                 </p>
+                               
                                 <p> 
-                                    <label for="usernamesignup" class="uname" data-icon="u">Pseudo</label>
-                                    <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="Aimad1991" />
-                                </p>
-                                <p> 
-                                    <label for="emailsignup" class="youmail" data-icon="e" > Your email</label>
-                                    <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="aimad.goussa@mail.com"/> 
+                                    <label for="emailsignup" class="youmail" data-icon="e" > Adresse Email</label>
+                                    <input id="emailsignup" name="email_text" required="required" type="email" placeholder="xxx@xx.x"/> 
                                 </p>
 								
 								
-								 
-								
-								<p> 
-                                    <label for="NumTel" class="uname" data-icon="u">Number Phone </label>
-                                    <input id="NumTel" name="kinduser" required="required" type="text" placeholder="+33 51 23 49 69 " />
-                                </p>
                                 <p> 
-                                    <label for="passwordsignup" class="youpasswd" data-icon="p">Your password </label>
-                                    <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                                    <label for="passwordsignup" class="youpasswd" data-icon="p">Password </label>
+                                    <input id="passwordsignup" name="pwd" required="required" type="password" placeholder="eg. X8df!90EO"/>
                                 </p>
+
                                 <p> 
-                                    <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Please confirm your password </label>
-                                    <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                                    <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">veuillez confirmer le  password </label>
+                                    <input id="passwordsignup_confirm" name="confirmation_pwd" required="required" type="password" placeholder="eg. X8df!90EO"/>
                                 </p>
+
                                 <p class="signin button"> 
 									<input type="submit" value="Sign up"/> 
 									
 								</p>
+
                                 <p class="change_link">  
 									Already a member ?
 									<a href="#tologin" class="to_register"> Go and log in </a>
 								</p>
+
                             </form>
                         </div>
 						
